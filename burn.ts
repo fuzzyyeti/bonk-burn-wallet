@@ -97,7 +97,6 @@ const tradeSolForBonk = async (amount: BN) => {
   console.log("bonk amount", bonkAta.amount);
   await bonk.burn(bonkAta.address, keypair, [], bonkAta.amount);
   console.log("bonk burned");
-  bonkAta = await bonk.getOrCreateAssociatedAccountInfo(keypair.publicKey);
 };
 //Uncomment this to test the swap portion without webhook data
 //tradeSolForBonk(new BN(100000))
