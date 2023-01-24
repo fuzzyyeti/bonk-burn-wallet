@@ -13,13 +13,20 @@ import {
 import { Percentage, DecimalUtil } from "@orca-so/common-sdk";
 import BN from "bn.js";
 import express from "express";
-import { incrementBurned } from "./data";
+import { getBurned, incrementBurned } from "./data";
+import cors from 'cors'
+
 dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(express.json());
+app.get("/burncount",cors(), async (req, res) => {
+	const burned = await getBurned();
+  return res.send(burned)
+});
+``
 app.post("/", (req, res) => {
   const { body } = req;
   const data = body[0];
