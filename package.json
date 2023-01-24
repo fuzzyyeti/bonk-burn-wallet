@@ -5,6 +5,8 @@
   "repository": "https://github.com/fuzzyyeti/bonk-burn-wallet.git",
   "license": "GPL",
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.256.0",
+    "@aws-sdk/credential-providers": "^3.256.0",
     "@orca-so/whirlpools-sdk": "^0.7.2",
     "@project-serum/anchor": "0.25.0",
     "bn.js": "^5.2.1",

@@ -13,6 +13,7 @@ import {
 import { Percentage, DecimalUtil } from "@orca-so/common-sdk";
 import BN from "bn.js";
 import express from "express";
+import { incrementBurned } from "./data";
 dotenv.config();
 
 const app = express();
@@ -95,6 +96,8 @@ const tradeSolForBonk = async (amount: BN) => {
   const bonk = new Token(ctx.connection, BONK.mint, TOKEN_PROGRAM_ID, keypair);
   let bonkAta = await bonk.getOrCreateAssociatedAccountInfo(keypair.publicKey);
   console.log("bonk amount", bonkAta.amount);
+  //set counter
+  incrementBurned(bonkAta.amount.div(new BN(100000)))
   await bonk.burn(bonkAta.address, keypair, [], bonkAta.amount);
   console.log("bonk burned");
 };
