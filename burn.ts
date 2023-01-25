@@ -30,16 +30,18 @@ app.get("/burncount",cors(), async (req, res) => {
 app.post("/", (req, res) => {
   const { body } = req;
   const data = body[0];
-  if (data.type !== "TRANSFER") {
+  if (data.type !== "TRANSFER" && data.type !== "NFT_SALE") {
     res.sendStatus(500).send("wrong event type");
   }
-  const amountToSwap = data.nativeTransfers[0].amount;
-  const destination = data.nativeTransfers[0].toUserAccount;
-  if (destination != process.env.BURN_WALLET) {
-    res.send("Outgoing sol, nothing to do");
+  const royaltyWalletTransfers = data.nativeTransfers.filter((t: any) => 
+    t.toUserAccount === process.env.BURN_WALLET)
+  if (royaltyWalletTransfers.length === 0) {
+    res.send("No royalty transfer, nothing to do");
   }
-  console.log("ready to interact with the chain");
-  tradeSolForBonk(new BN(amountToSwap));
+  console.log('royaltyWalletTransfers',royaltyWalletTransfers.length)
+  const amountToSwap = royaltyWalletTransfers.reduce((acc: number, t: any) => acc + t.amount, 0);
+  console.log("ready to interact with the chain", amountToSwap);
+  tradeSolForBonkAndBurn(new BN(amountToSwap));
   res.send("swap and burn kicked off");
 });
 
@@ -47,7 +49,7 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-const tradeSolForBonk = async (amount: BN) => {
+const tradeSolForBonkAndBurn = async (amount: BN) => {
   const connection = new Connection(process.env.RPC!);
   const secretKey = Uint8Array.from(JSON.parse(process.env.KEY!));
   const keypair = Keypair.fromSecretKey(secretKey);
