@@ -19,7 +19,7 @@ const incrementParams = (amount: BN) => {
 export const incrementBurned = async (burned: BN) => {
   try {
     const data = await ddbClient.send(new UpdateItemCommand(incrementParams(burned)));
-    console.log(data);
+    console.log('counter updated')
     return data;
   } catch (err) {
     console.error(err);
@@ -46,6 +46,3 @@ export const getBurned = async () => {
     return null
   }
 };
-
-//incrementBurned(99)
-//getBurned().then(b => console.log('burned', b))
