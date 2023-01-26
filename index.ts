@@ -6,6 +6,7 @@ import { getBurned } from "./data";
 import cors from 'cors'
 import { tradeSolForBonk, burnBonk } from "./actions";
 import { AnchorProvider, web3 } from "@project-serum/anchor";
+import basicAuth from 'express-basic-auth'
 
 dotenv.config();
 
@@ -13,6 +14,10 @@ const app = express();
 const port = 3000;
 
 app.use(express.json());
+console.log(process.env.WEBHOOK_AUTH)
+const webhookAuth = basicAuth({
+	users: {'webhook': process.env.WEBHOOK_AUTH!}
+});
 
 //Endpoint to create a dashboard counter for total burned
 app.get("/burncount",cors(), async (req, res) => {
@@ -22,7 +27,7 @@ app.get("/burncount",cors(), async (req, res) => {
 ``
 
 //Point the webhook to this endpoint. It expects a Helius enhanced transaction
-app.post("/webhook", (req, res) => {
+app.post("/webhook", webhookAuth, (req, res) => {
   const { body } = req;
   const data = body[0];
   if (data.type !== "TRANSFER" && data.type !== "NFT_SALE") {

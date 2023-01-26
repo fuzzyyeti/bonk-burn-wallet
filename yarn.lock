@@ -1414,6 +1414,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"basic-auth@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "basic-auth@npm:2.0.1"
+  dependencies:
+    safe-buffer: 5.1.2
+  checksum: 3419b805d5dfc518f3a05dcf42aa53aa9ce820e50b6df5097f9e186322e1bc733c36722b624802cd37e791035aa73b828ed814d8362333d42d7f5cd04d7a5e48
+  languageName: node
+  linkType: hard
+
 "bigint-buffer@npm:^1.1.5":
   version: 1.1.5
   resolution: "bigint-buffer@npm:1.1.5"
@@ -1476,6 +1485,7 @@ __metadata:
     cors: ^2.8.5
     dotenv: ^16.0.3
     express: ^4.18.2
+    express-basic-auth: ^1.2.1
     typescript: ^4.9.4
   languageName: unknown
   linkType: soft
@@ -1878,6 +1888,15 @@ __metadata:
   version: 4.0.7
   resolution: "eventemitter3@npm:4.0.7"
   checksum: 1875311c42fcfe9c707b2712c32664a245629b42bb0a5a84439762dd0fd637fc54d078155ea83c2af9e0323c9ac13687e03cfba79b03af9f40c89b4960099374
+  languageName: node
+  linkType: hard
+
+"express-basic-auth@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "express-basic-auth@npm:1.2.1"
+  dependencies:
+    basic-auth: ^2.0.1
+  checksum: 833e4d7d0733426b9db47fbe9d9b3e63679066fbc60f7db68f773337df0958fe03c8a0d5c2a2ef81687a8b17a77622ea57fb4683b5d79db21ad0ee853883ba96
   languageName: node
   linkType: hard
 
@@ -2795,6 +2814,13 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: cd4c999e54161f9f40e162f57d7f3313edf086ff5facefbdc0629d52066e9843ace987681dbff8b4329db225deb69f58c528d7818a9c7e89f0100969b7789c2d
+  languageName: node
+  linkType: hard
+
+"safe-buffer@npm:5.1.2":
+  version: 5.1.2
+  resolution: "safe-buffer@npm:5.1.2"
+  checksum: f2f1f7943ca44a594893a852894055cf619c1fbcb611237fc39e461ae751187e7baf4dc391a72125e0ac4fb2d8c5c0b3c71529622e6a58f46b960211e704903c
   languageName: node
   linkType: hard
 
